@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+    <referenceBlock name="category.product.type.details.renderers.default">
+        <action method="setTemplate">
+            <argument name="template" xsi:type="string">Boolfly_Brand::product/list.phtml</argument>
+        </action>
+        <block class="Boolfly\Brand\Block\Product\Listing\Brand" name="product.brand" template="Boolfly_Brand::product/list/brand.phtml"/>
+    </referenceBlock>
+</body>
+</page>

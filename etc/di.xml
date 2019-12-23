@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="BrandGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BrandGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Boolfly\Brand\Model\ResourceModel\Brand\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">BrandGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="brand_listing_data_source" xsi:type="string">Boolfly\Brand\Model\ResourceModel\Brand\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Boolfly\Brand\Model\ResourceModel\Brand\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bf_brand_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Boolfly\Brand\Model\ResourceModel\Brand</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Boolfly\Brand\CategoryImageUpload" type="Boolfly\Brand\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">catalog/tmp/brand</argument>
+            <argument name="basePath" xsi:type="string">catalog/brand</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Boolfly\Brand\Controller\Adminhtml\Brand\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Boolfly\Brand\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Boolfly\Brand\Model\ResourceModel\Brand">
+        <plugin name="clear_cache_brand_listing" type="Boolfly\Brand\Plugin\ClearCache" sortOrder="900"/>
+        <plugin name="image_processing" type="Boolfly\Brand\Plugin\ImageProcessingPlugin" sortOrder="999"/>
+    </type>
+    <type name="Boolfly\Brand\Plugin\ImageProcessingPlugin">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Boolfly\Brand\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+    <!--  Filter part  -->
+    <virtualType name="Boolfly\Brand\Model\Layer\Brand\Context" type="Magento\Catalog\Model\Layer\Context">
+        <arguments>
+            <argument name="collectionProvider" xsi:type="object">Boolfly\Brand\Model\Layer\Brand\ItemCollectionProvider</argument>
+            <argument name="stateKey" xsi:type="object">Magento\Catalog\Model\Layer\Category\StateKey</argument>
+            <argument name="collectionFilter" xsi:type="object">Boolfly\Brand\Model\Layer\Brand\CollectionFilter</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Boolfly\Brand\Model\Layer\Brand" type="Magento\Catalog\Model\Layer">
+        <arguments>
+            <argument name="context" xsi:type="object">Boolfly\Brand\Model\Layer\Brand\Context</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Catalog\Model\Layer\Resolver">
+        <arguments>
+            <argument name="layersPool" xsi:type="array">
+                <item name="brand" xsi:type="string">Boolfly\Brand\Model\Layer\Brand</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- End Filter part  -->
+</config>

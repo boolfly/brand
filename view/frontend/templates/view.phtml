@@ -1,0 +1,12 @@
+<?php
+/** @var \Boolfly\Brand\Block\View $block */
+$brand = $block->getBrand();
+?>
+<div class="brand-content">
+    <div class="brand-image">
+        <img src="<?= $block->getImage(); ?>" alt="<?= $block->escapeHtml($brand->getName())?>"
+    </div>
+    <div class="brand-description">
+        <?= $block->getCmsFilterContent($brand->getDescription()); ?>
+    </div>
+</div>

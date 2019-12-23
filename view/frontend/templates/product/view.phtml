@@ -1,0 +1,12 @@
+<?php
+/** @var \Boolfly\Brand\Block\Product\View $block */
+$brand = $block->getBrand();
+?>
+<?php if ($brand): ?>
+    <div class="bf_brand-product-view">
+        <a href="<?= $block->escapeHtml($brand->getData('url')); ?>" class="brand-item">
+            <img src="<?= $brand->getData('image'); ?>" alt="<?= $block->escapeHtml($brand->getData('name'));?>"/>
+            <span><?= $block->escapeHtml($brand->getData('name')); ?></span>
+        </a>
+    </div>
+<?php endif; ?>

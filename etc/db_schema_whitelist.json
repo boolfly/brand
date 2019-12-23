@@ -1,0 +1,15 @@
+{
+    "bf_brand_entity": {
+        "column": {
+            "entity_id": true,
+            "name": true,
+            "url_key": true,
+            "image": true,
+            "description": true,
+            "visibility": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

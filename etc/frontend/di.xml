@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="brandrouter" xsi:type="array">
+                    <item name="class" xsi:type="string">Boolfly\Brand\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">80</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Boolfly\Brand\Block\View\ListProduct" type="Magento\Catalog\Block\Product\ListProduct">
+        <arguments>
+            <argument name="catalogLayer" xsi:type="object">Boolfly\Brand\Model\Layer\Brand</argument>
+        </arguments>
+    </virtualType>
+</config>

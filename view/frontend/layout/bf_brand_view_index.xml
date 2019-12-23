@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="page-products"/>
+        <referenceContainer name="columns.top">
+            <container name="brand.view.container" htmlTag="div" htmlClass="brand-view" after="-">
+                <block class="Boolfly\Brand\Block\View" name="brand.view" template="Boolfly_Brand::view.phtml"/>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Boolfly\Brand\Block\View" name="brand.view.products" template="Boolfly_Brand::view/products.phtml">
+                <block class="Boolfly\Brand\Block\View\ListProduct" name="brand.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                        <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName">
+                        <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                    </action>
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                        <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="product.addto" as="addto">
+                        <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="catalogsearch.product.addto.wishlist" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>
+                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="catalogsearch.product.addto.compare" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    </block>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

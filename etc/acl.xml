@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Boolfly_Brand::brand" title="Boolfly Brand">
+                    <resource id="Boolfly_Brand::index" title="Brands" sortOrder="10"/>
+                    <resource id="Boolfly_Brand::save" title="Save Brand" sortOrder="20"/>
+                    <resource id="Boolfly_Brand::delete" title="Delete Brand" sortOrder="30"/>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Boolfly_Brand::config" title="Boolfly Brand Section"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

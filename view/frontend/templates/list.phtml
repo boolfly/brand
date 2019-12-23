@@ -1,0 +1,43 @@
+<?php
+/** @var \Boolfly\Brand\Block\View\Listing $block */
+?>
+<div class="bf_brand_listing" data-bind="scope: 'brands'">
+    <div class="header">
+        <div class="title"><span><?= __('Select Your Brand'); ?></span></div>
+        <div class="list-brands">
+            <ul data-bind="foreach: { data: alpha }">
+                <li data-bind="css: {selected: $data == $parent.alphaSelected()}"><a data-bind="html: $data, click: $parent.goto.bind($parent, $data)"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brands-listing" data-bind="blockLoader: isLoading">
+        <div data-bind="foreach: item_data()">
+            <div class="item-list">
+                <span class="character" data-bind="html: $data.text, visible: $parent.isVisible()"></span>
+                <ul class="list" data-bind="foreach: $data.items" >
+                    <li class="item">
+                        <a data-bind="attr: { href: $data.url}">
+                            <span class="brand-name" data-bind="text: $data.name"></span>
+                            <img data-bind="attr: {src: $data.image, alt: $data.name}" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                        "brands": {
+                            "component": "Boolfly_Brand/js/brands",
+                            "items": <?= $block->getJsonData(); ?>
+                        }
+                    }
+                },
+                "Magento_Ui/js/block-loader": "<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+            }
+    }
+</script>

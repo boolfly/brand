@@ -1,0 +1,21 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="bf_brand_entity" resource="default" engine="innodb" comment="Brand Entity">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" comment="Entity Id" identity="true"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Brand Name"/>
+        <column xsi:type="varchar" name="url_key" length="255" nullable="false" comment="Url Key"/>
+        <column xsi:type="text" name="image" nullable="false" comment="Image of brand"/>
+        <column xsi:type="text" name="description" nullable="false" comment="Description"/>
+        <column xsi:type="smallint" name="visibility" nullable="false" comment="Visibility" default="0"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="BRAND_ENTITY_URL_KEY">
+            <column name="url_key"/>
+        </constraint>
+        <index referenceId="BF_BRAND_NAME_URL_KEY" indexType="fulltext">
+            <column name="name"/>
+            <column name="url_key"/>
+        </index>
+    </table>
+</schema>

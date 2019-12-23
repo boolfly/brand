@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Boolfly_Brand::brand" title="Boolfly Brand" module="Boolfly_Brand" sortOrder="61" parent="Magento_Catalog::catalog"
+             resource="Boolfly_Brand::brand"/>
+        <add id="Boolfly_Brand::index" title="Brands Listing" module="Boolfly_Brand" sortOrder="10" parent="Boolfly_Brand::brand"
+             action="bf_brand/brand/index" resource="Boolfly_Brand::index"/>
+    </menu>
+</config>
